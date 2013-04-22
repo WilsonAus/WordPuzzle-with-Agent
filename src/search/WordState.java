@@ -18,12 +18,14 @@ public class WordState implements State {
 		Actions actions = new Actions();
 		WordSmith agent = new WordSmith();
 		SnapShot percept = new Snapshot();
-		//until word fully cycled
+		//while word not fully cycled
 			actions.add(agent.getAction(percept));
+		//end while
+		return actions;
 	}
   
 	public Object clone () {
-	  
+		return this.clone();	  
 	}
   
 }
