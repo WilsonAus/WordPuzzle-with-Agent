@@ -20,17 +20,9 @@ public class WordPuzzle implements Environment{
 	public StringBuffer str;
 	public StringBuffer fin;
 	
-	public SnapShot state;
+	public SnapShot current;
 	
 	
-	public WordPuzzle(StringBuffer start, StringBuffer end) {
-		str = start;
-		fin = end;
-		state = new SnapShot();
-		WordState x = new WordState();
-		x.word = start;
-		state.changeState(x);
-	}
 	
 	
 	public Object clone()  {
@@ -52,7 +44,7 @@ public class WordPuzzle implements Environment{
 	}
 	
 	public SnapShot getPercept() {
-		return state;
+		return current;
 	}
 	
 	
@@ -60,7 +52,7 @@ public class WordPuzzle implements Environment{
 	
 		Step move = (Step) step;
 		
-		String word = state.getState().toString();
+		String word = current.getState().toString();
 		word = word.toLowerCase();
 
 		
@@ -75,12 +67,12 @@ public class WordPuzzle implements Environment{
 			dictionary = new SpellDictionaryHashMap(new File("bin/english.0"));
 			SpellChecker spellChecker = new SpellChecker(dictionary);
 			result = spellChecker.checkSpelling(new StringWordTokenizer(word));
-			if (result == SpellChecker.SPELLCHECK_OK) System.out.println(state.getState());
+			if (result == SpellChecker.SPELLCHECK_OK) System.out.println(current.getState());
 		}   catch (IOException e) {
 			e.printStackTrace();
 		}
 		
-			state.getState().word.setCharAt(move.getPos(), move.getTo());
+			current.getState().setCharAt(move.getPos(), move.getTo());
 		
 
 	}
