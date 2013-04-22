@@ -15,7 +15,11 @@ public class WordState implements State {
 	}
   
 	public Actions getActions () {
-		can you see this edit?
+		Actions actions = new Actions();
+		WordSmith agent = new WordSmith();
+		SnapShot percept = new Snapshot();
+		//until word fully cycled
+			actions.add(agent.getAction(percept));
 	}
   
 	public Object clone () {
