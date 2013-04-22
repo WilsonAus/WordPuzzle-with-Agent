@@ -15,7 +15,7 @@ public class WordState implements State {
 	}
   
 	public Actions getActions () {
-		return 
+		can you see this edit?
 	}
   
 	public Object clone () {
