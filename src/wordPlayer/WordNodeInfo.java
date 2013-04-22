@@ -6,9 +6,12 @@ import search.WordState;
 
 public class WordNodeInfo implements NodeInfo {
 	
-	StringBuffer goal;
+
+	public StringBuffer initial;
+	public StringBuffer goal;
 	
-	public WordNodeInfo(StringBuffer finish) {
+	public WordNodeInfo(StringBuffer start, StringBuffer finish) {
+		initial = start;
 		goal = finish;
 	}
 		
