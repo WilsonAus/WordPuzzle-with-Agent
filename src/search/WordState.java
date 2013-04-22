@@ -20,7 +20,11 @@ public class WordState implements State {
 		SnapShot percept = new Snapshot();
 		//while word not fully cycled
 		while ( agent.getCurrent() != -1 ) {
-			actions.add(agent.getAction(percept));
+			Action nextAction = agent.getAction(percept);
+			actions.add(nextAction);
+			WordState clone = this.clone();
+			clone.update(nextAction);
+			System.out.println(clone.word);
 		}
 		//end while
 		
