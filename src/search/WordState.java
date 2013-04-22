@@ -19,8 +19,11 @@ public class WordState implements State {
 		WordSmith agent = new WordSmith();
 		SnapShot percept = new Snapshot();
 		//while word not fully cycled
+		while ( agent.getCurrent() != 0 ) {
 			actions.add(agent.getAction(percept));
+		}
 		//end while
+		
 		return actions;
 	}
   
