@@ -8,6 +8,12 @@ public class SnapShot implements Percept {
 	
 	private StringBuffer current;
 	private int index;
+	private int timesCycled;
+	
+	public SnapShot(StringBuffer word) {
+		current = word;
+		index = word.length - 1;
+	}
 	
 	public StringBuffer getState() {
 		return current;
@@ -29,6 +35,7 @@ public class SnapShot implements Percept {
 	public void changeState(StringBuffer change) {
 		current = change;
 	}
+	
 	
 	
 	
