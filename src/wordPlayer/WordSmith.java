@@ -18,18 +18,6 @@ public class WordSmith implements Agent {
 		info = new WordNodeInfo(goal);
 	}
 	
-	public void nextLetter() {
-		if ( current == 0 ) {	
-			current = 0;
-		}
-		else {
-			current --;
-		}
-	}
-	
-	public int getCurrent() {
-		return current;
-	}
 	
 	public Node depthFirstSearch(StringBuffer start, StringBuffer goal){ 
 		WordState startState = new WordState();
@@ -43,12 +31,15 @@ public class WordSmith implements Agent {
 	public Action getAction(Percept percept) {
 		/* Current percept */
 		SnapShot now = (SnapShot) percept;
+		int n = now.getIndex();
 		
 		/*StringBuffer to hold current percepts word state*/
 		StringBuffer word = now.getState().word;
 		
 		/*Buffer to hold next move once worked out*/
 		Step next;
+		
+		if( n == 0 ) return null;
 		
 		char x = word.charAt(current);
 		
