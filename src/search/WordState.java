@@ -17,7 +17,7 @@ public class WordState implements State {
 	public Actions getActions () {
 		Actions actions = new Actions();
 		WordSmith agent = new WordSmith();
-		SnapShot percept = new Snapshot();
+		SnapShot percept = new Snapshot(word);
 		//while word not fully cycled
 		while ( agent.getCurrent() != -1 ) {
 			Action nextAction = agent.getAction(percept);
