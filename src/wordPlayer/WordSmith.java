@@ -11,19 +11,22 @@ import agent.Percept;
 public class WordSmith implements Agent {
 
 	private int current;
-	WordNodeInfo info;
+	WordNodeInfo game;
+	public StringBuffer start;
+	public StringBuffer finish;
 	
-	public WordSmith(StringBuffer goal, int length) {
-		current = length;
-		info = new WordNodeInfo(goal);
+	public WordSmith(WordNodeInfo info) {
+		current = info.initial.length();
+		start = info.initial;
+		finish = info.goal;
+		game = info;
 	}
-	
 	
 	public Node depthFirstSearch(StringBuffer start, StringBuffer goal){ 
 		WordState startState = new WordState();
 		startState.word = start;
-		WordNodeInfo nodeInfo = new WordNodeInfo(goal);
-		DepthFirstSearch dfs = new DepthFirstSearch(startState, nodeInfo);
+		startState.info = game;
+		DepthFirstSearch dfs = new DepthFirstSearch(startState, game);
 		return dfs.search();
 	}
 	
@@ -34,21 +37,22 @@ public class WordSmith implements Agent {
 		int n = now.getIndex();
 		
 		/*StringBuffer to hold current percepts word state*/
-		StringBuffer word = now.getState().word;
+		StringBuffer word = now.getState();
 		
 		/*Buffer to hold next move once worked out*/
 		Step next;
 		
-		if( n == 0 ) return null;
-		
-		char x = word.charAt(current);
-		
-		if( word.charAt(current) == 'Z') { 
-			next = new Step(current, 'A');
+		char x = word.charAt( now.getIndex());
+		if( n == 0 ) { return null; }
+		if(now.timesCycled == 26) { now.nextLetter(); }
+		if( word.charAt(now.getIndex()) == 'Z') { 
+			next = new Step(now.getIndex(), 'A');
+			now.timesCycled++;
 		}
 		else {
-			word.setCharAt(current, x++);
-			next = new Step(current, x);
+			word.setCharAt(now.getIndex(), x++);
+			next = new Step(now.getIndex(), x);
+			now.timesCycled++;
 		}
 		
 		
