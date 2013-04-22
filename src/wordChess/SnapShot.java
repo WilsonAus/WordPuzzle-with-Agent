@@ -8,11 +8,12 @@ public class SnapShot implements Percept {
 	
 	private StringBuffer current;
 	private int index;
-	private int timesCycled;
+	public int timesCycled;
 	
 	public SnapShot(StringBuffer word) {
 		current = word;
-		index = word.length - 1;
+		index = word.length() - 1;
+		timesCycled = 0;
 	}
 	
 	public StringBuffer getState() {
@@ -24,11 +25,11 @@ public class SnapShot implements Percept {
 	}
 	
 	public void nextLetter() {
-		if ( current == 0 ) {	
-			current = 0;
+		if ( index == 0 ) {	
+			index = 0;
 		}
 		else {
-			current --;
+			index--;
 		}
 	}
 	
